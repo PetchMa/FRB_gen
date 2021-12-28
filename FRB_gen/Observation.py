@@ -103,7 +103,7 @@ class Observation(object):
 
         psr_name = "FRB_test" 
 
-        self.pulse_template = pss.pulsar.Pulsar(self.period, self.Smean, profiles=self.profile_pulse, name = psr_name)
+        self.pulse_template = pss.pulsar.Pulsar(self.false_period, self.Smean, profiles=self.profile_pulse, name = psr_name)
 
         # define the observation length
         self.obslen = 60.0*20
@@ -116,5 +116,4 @@ class Observation(object):
 
         # Re-make the pulses
         self.pulse_template .make_pulses(self.signal, tobs = self.obslen)
-        return 
 
