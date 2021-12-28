@@ -30,55 +30,54 @@ class Observation(object):
                  dm = 100,
                  obs_data=None,
                  **kwargs):
-    """
-    Generate random points
-    Parameters
-    ----------
-    f0 :center frequency and in MHz 
-    bw : bandwidth in MHz 
-    Nf : number of frequency bins
-    Nt : number of time bins 
-    df : frequency resolution MHz 
-    dt : time resolution in seconds 
-    false_period : fake pulsar period in seconds
-    func_freq : function govering the profile as func of freq
-    func_time : function govering the profile as a func of time     
-    mu_time: mean for guassian time profile 
-    sigma_time: deviation for guassian time profile 
-    loc_time : location center for skewnorm frequency profile
-    scale_time : spread of skewnorm frequency
-    a_val : skewnorm parameter 
-    Smean : The mean flux of the pulsar  
-    tau_d: seconds; note this is an unphysical number and controls scattering
-    ref_freq:  MHz, reference frequency of the scatter timescale input   
-    dm : dispersion measure
-    Returns
-    -------
-    coordinates : numpy array [num, 2]
-    coordinates of where the beams will be in the sky"""
-    self.f0 =f0
-    self.bw= bw
-    self.Nf = Nf
-    self.Nt = Nt 
-    self.func_freq = func_freq
-    self.func_time = func_time
+        """Generate random points
+        Parameters
+        ----------
+        f0 :center frequency and in MHz 
+        bw : bandwidth in MHz 
+        Nf : number of frequency bins
+        Nt : number of time bins 
+        df : frequency resolution MHz 
+        dt : time resolution in seconds 
+        false_period : fake pulsar period in seconds
+        func_freq : function govering the profile as func of freq
+        func_time : function govering the profile as a func of time     
+        mu_time: mean for guassian time profile 
+        sigma_time: deviation for guassian time profile 
+        loc_time : location center for skewnorm frequency profile
+        scale_time : spread of skewnorm frequency
+        a_val : skewnorm parameter 
+        Smean : The mean flux of the pulsar  
+        tau_d: seconds; note this is an unphysical number and controls scattering
+        ref_freq:  MHz, reference frequency of the scatter timescale input   
+        dm : dispersion measure
+        Returns
+        -------
+        coordinates : numpy array [num, 2]
+        coordinates of where the beams will be in the sky"""
+        self.f0 =f0
+        self.bw= bw
+        self.Nf = Nf
+        self.Nt = Nt 
+        self.func_freq = func_freq
+        self.func_time = func_time
 
-    self.mu_time=mu_time
-    self.sigma_time = sigma_time
-    self.loc_freq=loc_freq
-    self.scale_freq = scale_freq
-    self.a_norm = a_norm
-    self.Smean = Smean
-    self.tau_d = tau_d # seconds; note this is an unphysical number
-    self.ref_freq = ref_freq # MHz, reference frequency of the scatter timescale input
-    self.dm = dm
+        self.mu_time=mu_time
+        self.sigma_time = sigma_time
+        self.loc_freq=loc_freq
+        self.scale_freq = scale_freq
+        self.a_norm = a_norm
+        self.Smean = Smean
+        self.tau_d = tau_d # seconds; note this is an unphysical number
+        self.ref_freq = ref_freq # MHz, reference frequency of the scatter timescale input
+        self.dm = dm
 
-    self.sublen = 100
-    if df ==None:
-        df = (1.0/period)*76*10**-6 
-    
-    self.df = df 
-    self.false_period = false_period
+        self.sublen = 100
+        if df ==None:
+            df = (1.0/period)*76*10**-6 
+        
+        self.df = df 
+        self.false_period = false_period
 
     def create_FRB_profile(self):
         # setup grid
