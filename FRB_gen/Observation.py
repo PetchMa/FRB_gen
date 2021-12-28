@@ -74,7 +74,7 @@ class Observation(object):
 
         self.sublen = 100
         if df ==None:
-            df = (1.0/false_period)*76*10**-6 
+            self.df = (1.0/false_period)*76*10**-6 
         
         self.df = df 
         self.false_period = false_period
@@ -96,7 +96,7 @@ class Observation(object):
 
     def create_pulse(self):
         # we set up the signal:
-        self.signal = pss.signal.FilterBankSignal(fcent = self.f0, bandwidth = self.bw, Nsubband=self.Nf, sample_rate = self.f_samp,
+        self.signal = pss.signal.FilterBankSignal(fcent = self.f0, bandwidth = self.bw, Nsubband=self.Nf, sample_rate = self.df,
                                         sublen = self.sublen, fold = True) # fold is set to `True`
 
         self.profile_pulse = self.create_FRB_profile()
