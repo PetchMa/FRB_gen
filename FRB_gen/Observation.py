@@ -74,7 +74,7 @@ class Observation(object):
 
         self.sublen = 100
         if df ==None:
-            df = (1.0/period)*76*10**-6 
+            df = (1.0/false_period)*76*10**-6 
         
         self.df = df 
         self.false_period = false_period
