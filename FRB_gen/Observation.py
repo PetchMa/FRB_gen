@@ -74,7 +74,7 @@ class Observation(object):
 
         self.sublen = 100
         if df ==None:
-            self.df = (1.0/false_period)*76*10**-6 
+            self.df = (1.0/false_period)*self.Nf*10**-6 
         
         self.df = df 
         self.false_period = false_period
@@ -84,13 +84,13 @@ class Observation(object):
         time, freq = np.meshgrid(np.linspace(-1, 1, self.Nt), np.linspace(-1, 1, self.Nf))
 
         if self.func_freq and self.func_time:
-            profile = self.func_freq(freq)*self.func_time(time)
+            self.profile = self.func_freq(freq)*self.func_time(time)
         else:
-            profile = gaussian(time,  mu=self.mu_time, sig=self.sigma_time )*skewnorm.pdf(freq, self.a_norm ,  
+            self.profile = gaussian(time,  mu=self.mu_time, sig=self.sigma_time )*skewnorm.pdf(freq, self.a_norm ,  
                                                                                         loc=self.loc_freq, 
                                                                                         scale=self.scale_freq)
         # then we normalize it 
-        profile_pulse = pss.pulsar.DataProfile(profile/profile.max())
+        profile_pulse = pss.pulsar.DataProfile(self.profile/self.profile.max())
 
         return profile_pulse
 
