@@ -108,7 +108,8 @@ class Observation(object):
 
         # define the observation length
         self.obslen = 60.0*20
-
+        self.pulse_template .make_pulses(self.signal_creation, tobs = self.obslen)
+        
         ism_sim = pss.ism.ISM()
         ism_sim.disperse(self.signal_creation, self.dm)
 
