@@ -109,12 +109,12 @@ class Observation(object):
         # define the observation length
         self.obslen = 60.0*20
         self.pulse_template .make_pulses(self.signal_creation, tobs = self.obslen)
-        
+
         ism_sim = pss.ism.ISM()
         ism_sim.disperse(self.signal_creation, self.dm)
 
         # Now add the FD parameter delay, this takes two arguements, the signal and the list of FD parameters
-        ism_sim.scatter_broaden(self.signal_creation , d_tau, ref_freq, convolve = True, pulsar = self.pulse_template)
+        ism_sim.scatter_broaden(self.signal_creation , self.d_tau, ref_freq, convolve = True, pulsar = self.pulse_template)
 
         # Re-make the pulses
         self.pulse_template .make_pulses(self.signal_creation, tobs = self.obslen)
