@@ -48,7 +48,7 @@ class Observation(object):
         scale_time : spread of skewnorm frequency
         a_val : skewnorm parameter 
         Smean : The mean flux of the pulsar  
-        tau_d: seconds; note this is an unphysical number and controls scattering
+        d_tau: seconds; note this is an unphysical number and controls scattering
         ref_freq:  MHz, reference frequency of the scatter timescale input   
         dm : dispersion measure
         Returns
@@ -68,7 +68,7 @@ class Observation(object):
         self.scale_freq = scale_freq
         self.a_norm = a_norm
         self.Smean = Smean
-        self.tau_d = tau_d # seconds; note this is an unphysical number
+        self.d_tau = d_tau # seconds; note this is an unphysical number
         self.ref_freq = ref_freq # MHz, reference frequency of the scatter timescale input
         self.dm = dm
 
@@ -112,7 +112,7 @@ class Observation(object):
         ism_sim.disperse(self.signal, self.dm)
 
         # Now add the FD parameter delay, this takes two arguements, the signal and the list of FD parameters
-        ism_sim.scatter_broaden(self.signal , tau_d, ref_freq, convolve = True, pulsar = self.pulse_template)
+        ism_sim.scatter_broaden(self.signal , d_tau, ref_freq, convolve = True, pulsar = self.pulse_template)
 
         # Re-make the pulses
         self.pulse_template .make_pulses(self.signal, tobs = self.obslen)
