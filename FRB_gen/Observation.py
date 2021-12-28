@@ -96,7 +96,8 @@ class Observation(object):
 
     def create_pulse(self):
         # we set up the signal:
-        self.signal = pss.signal.FilterBankSignal(fcent = self.f0, bandwidth = self.bw, Nsubband=self.Nf, sample_rate = self.df,
+        self.signal_creation = pss.signal.FilterBankSignal(fcent = self.f0, bandwidth = self.bw, Nsubband=self.Nf, 
+                                        sample_rate = self.df,
                                         sublen = self.sublen, fold = True) # fold is set to `True`
 
         self.profile_pulse = self.create_FRB_profile()
@@ -109,11 +110,11 @@ class Observation(object):
         self.obslen = 60.0*20
 
         ism_sim = pss.ism.ISM()
-        ism_sim.disperse(self.signal, self.dm)
+        ism_sim.disperse(self.signal_creation, self.dm)
 
         # Now add the FD parameter delay, this takes two arguements, the signal and the list of FD parameters
-        ism_sim.scatter_broaden(self.signal , d_tau, ref_freq, convolve = True, pulsar = self.pulse_template)
+        ism_sim.scatter_broaden(self.signal_creation , d_tau, ref_freq, convolve = True, pulsar = self.pulse_template)
 
         # Re-make the pulses
-        self.pulse_template .make_pulses(self.signal, tobs = self.obslen)
+        self.pulse_template .make_pulses(self.signal_creation, tobs = self.obslen)
 
