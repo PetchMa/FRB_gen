@@ -30,7 +30,6 @@ class Observation(object):
                  dm = 100,
                  obs_data=None,
                  **kwargs):
-    
     """
     Generate random points
     Parameters
@@ -56,8 +55,7 @@ class Observation(object):
     Returns
     -------
     coordinates : numpy array [num, 2]
-    coordinates of where the beams will be in the sky
-    """
+    coordinates of where the beams will be in the sky"""
     self.f0 =f0
     self.bw= bw
     self.Nf = Nf
@@ -115,8 +113,9 @@ class Observation(object):
         ism_sim.disperse(self.signal, self.dm)
 
         # Now add the FD parameter delay, this takes two arguements, the signal and the list of FD parameters
-        ism_sim.scatter_broaden(self.signal , tau_d, ref_freq, convolve = True, pulsar = self.pulse_template )
+        ism_sim.scatter_broaden(self.signal , tau_d, ref_freq, convolve = True, pulsar = self.pulse_template)
 
         # Re-make the pulses
-        pulsar_J1713.make_pulses(self.signal, tobs = self.obslen)
+        self.pulse_template .make_pulses(self.signal, tobs = self.obslen)
+        return 
 
