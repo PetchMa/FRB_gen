@@ -75,8 +75,9 @@ class Observation(object):
         self.sublen = 100
         if df ==None:
             self.df = (1.0/false_period)*self.Nf*10**-6 
-        
-        self.df = df 
+        else:
+            self.df = df 
+            
         self.false_period = false_period
 
     def create_FRB_profile(self):
